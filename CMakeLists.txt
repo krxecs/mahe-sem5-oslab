@@ -4,6 +4,7 @@ project(oslab-c-code)
 
 include(CTest)
 
+add_subdirectory(lab4)
 add_subdirectory(lab5)
 add_subdirectory(lab6)
 
