@@ -14,6 +14,14 @@ void perrf(bool b, const char *s) {
   }
 }
 
+void perrf_free(bool b, void *p, const char *s) {
+  if (b) {
+    perror(s);
+    free(p);
+    exit(EXIT_FAILURE);
+  }
+}
+
 void fd_to_file(int n, FILE *dst[n], const char *m[n], int src[n]) {
   for (int i = 0; i < n; ++i) {
     dst[i] = fdopen(src[i], m[i]);
@@ -78,7 +86,7 @@ ssize_t getline_from_fd(char **lineptr, size_t *n, int fd) {
 ssize_t read_exact(int fd, void *buf, size_t count) {
   size_t total_read = 0;
   char *cbuf = (char *)buf;
-  
+
   while (total_read < count) {
     ssize_t n = read(fd, cbuf + total_read, count - total_read);
     if (n <= 0) {
